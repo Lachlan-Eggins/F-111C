@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- The Sounds file for the General-Dynamics_F-111F 3D model    -->
+<!-- The Sounds file for the F-111C 3D model    -->
 <!-- License: GNU GENERAL PUBLIC LICENSE Version 2, June 1991    -->
-<!-- Author:  Patrizio Melis                                     -->
-<!-- Email:   cobe571@gmail.com                                  -->
+<!-- Author:  Lachlan Eggins                                -->
+                                
 
 <!--
 
@@ -18,7 +18,7 @@
     
     <wind>
       <name>Wind-Internal</name>
-      <path>Aircraft/General-Dynamics_F-111F/Sounds/Wind.wav</path>
+      <path>Aircraft/F-111C/Sounds/Wind.wav</path>
       <mode>looped</mode>
       <condition>
 	<and>
@@ -53,7 +53,7 @@
     
     <wind>
       <name>Wind-External</name>
-      <path>Aircraft/General-Dynamics_F-111F/Sounds/Wind.wav</path>
+      <path>Aircraft/F-111C/Sounds/Wind.wav</path>
       <mode>looped</mode>
       <condition>
 	<and>
@@ -90,7 +90,7 @@
 	
 	<crank> 
       <name>engstart</name>
-      <path>Aircraft/General-Dynamics_F-111F/Sounds/General-Dynamics_F-111F-Start-UP.wav</path>
+      <path>Aircraft/F-111C/Sounds/F-111C-Start-UP.wav</path>
       <property>/engines/engine/cranking</property>
       <volume> 
         <property>/orientation/alpha-deg</property>
@@ -108,7 +108,7 @@
 
     <engine>
       <name>Engine-Internal</name>
-      <path>Aircraft/General-Dynamics_F-111F/Sounds/General-Dynamics_F-111F-Engine-IN.wav</path>
+      <path>Aircraft/F-111C/Sounds/F-111C-Engine-IN.wav</path>
       <mode>looped</mode>
       <condition>
 	<and>
@@ -136,7 +136,7 @@
     
     <engine>
       <name>Engine-External</name>
-      <path>Aircraft/General-Dynamics_F-111F/Sounds/General-Dynamics_F-111F-Engine-Out.wav</path>
+      <path>Aircraft/F-111C/Sounds/F-111C-Engine-Out.wav</path>
       <mode>looped</mode>
       <condition>
 	<and>
@@ -178,7 +178,7 @@
 	
 	<engine-0> 
       <name>Engine Shut Down</name>
-      <path>Aircraft/General-Dynamics_F-111F/Sounds/General-Dynamics_F-111F-Engine-Shut-Down.wav</path>
+      <path>Aircraft/F-111C/Sounds/F-111C-Engine-Shut-Down.wav</path>
       <condition> 
         <property>/engines/engine/running</property>
         <not> 
@@ -207,7 +207,7 @@
 	<rumble> 
       <name>rumble</name>
       <mode>looped</mode>
-      <path>Aircraft/General-Dynamics_F-111F/Sounds/rumble.wav</path>
+      <path>Aircraft/F-111C/Sounds/rumble.wav</path>
       <condition> 
         <or> 
           <property>/gear/gear[0]/wow</property>
@@ -227,7 +227,7 @@
 	
 	<squeal> 
       <name>squeal</name>
-      <path>Aircraft/General-Dynamics_F-111F/Sounds/squeal.wav</path>
+      <path>Aircraft/F-111C/Sounds/squeal.wav</path>
       <condition> 
         <or> 
           <property>/gear/gear[0]/wow</property>
