@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<PropertyList include="Aircraft/Generic/Human/Include/walker-include.xml">
+    <sim>
+        <minimum-fg-version>2018.3</minimum-fg-version>
+        <tags>
+            <tag>bomber</tag>
+            <tag>jet</tag>
+            <tag>dual-engine</tag>
+            <tag>retractable-gear</tag>
+            <tag>ifr</tag>
+            <tag>hud</tag>
+            <tag>refuel</tag>
+        </tags>
+        <sound>
+            <path>Aircraft/F-111C/Systems/F-111-Sound.xml</path>
+        </sound>
+    </sim>
+</PropertyList>

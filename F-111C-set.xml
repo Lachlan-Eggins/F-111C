@@ -1,0 +1,47 @@
+<?xml  version="1.0"?>
+<!-- F-111 C Variant
+   |  Lachlan Eggins: 2020-4-26
+-->
+<PropertyList include="F-111C-common.xml">
+  <sim>
+    <description>General Dynamics F-111C Aardvark</description>
+    <long-description>
+    	The General Dynamics F-111 Aardvark is a retired American supersonic, medium-range interdictor and tactical attack aircraft that also filled the roles of strategic nuclear bomber, aerial reconnaissance, and electronic-warfare aircraft in its various versions. Developed in the 1960s by General Dynamics, it first entered service in 1967 with the United States Air Force. The Royal Australian Air Force (RAAF) also ordered the type and began operating F-111Cs in 1973.
+    </long-description>
+    <status>alpha</status>
+    <previews>
+      <preview>
+        <type>exterior</type>
+        <splash type="bool">true</splash>
+        <path>Previews/F-111_1.jpg</path>
+      </preview>
+    <startup>
+      <splash-texture>Aircraft/F-111C/f111-splash.jpg</splash-texture>
+      <splash-logo-image>Aircraft/F-111C/f111C-splash-logo.png</splash-logo-image>
+    </startup>
+    <model>
+      <path>Aircraft/F-111C/Models/F-111C.xml</path>
+      <F-111C>
+        <variant>C</variant>
+      </F-111C>
+    </model>
+    <rating>
+      <FDM type="int">1</FDM>
+      <systems type="int">1</systems>
+      <cockpit type="int">3</cockpit>
+      <model type="int">2</model>
+    </rating>
+  </sim>
+  <fdm>
+    <jsbsim>
+      <metrics>
+        <two-place-canopy type="int">0</two-place-canopy>
+      </metrics>
+    </jsbsim>
+  </fdm>
+  <nasal>
+    <f111C_net>
+      <file>Aircraft/F-111C/Nasal/mp-network.nas</file>
+    </f111C_net>
+  </nasal>
+</PropertyList>

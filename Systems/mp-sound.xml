@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- The MP Sound file for the General-Dynamics_F-111F 3D model    -->
+<!-- License: GNU GENERAL PUBLIC LICENSE Version 2, June 1991      -->
+<!-- Author:  Patrizio Melis                                       -->
+<!-- Email:   cobe571@gmail.com                                    -->
+
+<!--
+
+  Flyby volume (Doppler volume)
+  http://sourceforge.net/p/flightgear/mailman/flightgear-devel/thread/4979A012.8000101%40gogo.co.nz/#msg21410290
+
+-->
+
+<PropertyList>
+
+  <fx>
+    
+    <wind>
+      <name>Wind-Internal</name>
+      <path>Aircraft/General-Dynamics_F-111F/Sounds/Wind.wav</path>
+      <mode>looped</mode>
+      <condition>
+	<and>
+	  <greater-than>		
+	    <property>velocities/airspeed-kt</property>
+	    <value>20</value>
+	  </greater-than>
+	  <property>sim/current-view/internal</property>
+        </and>
+      </condition>
+      <property>velocities/airspeed-kt</property>
+      <volume>
+	<property>position/altitude-ft</property>
+	<factor>-0.000015</factor>
+	<offset>1.0</offset>
+	<min>0.1</min>
+	<max>1.0</max>
+      </volume>
+      <volume>
+	<property>velocities/airspeed-kt</property>
+	<factor>0.001</factor>
+	<min>0.01</min>
+	<max>5</max>
+      </volume>
+      <pitch>
+	<property>velocities/airspeed-kt</property>
+	<factor>0.001</factor>
+	<offset>1</offset>
+      </pitch>
+      <max-dist>100</max-dist>
+    </wind>
+    
+    <wind>
+      <name>Wind-External</name>
+      <path>Aircraft/General-Dynamics_F-111F/Sounds/Wind.wav</path>
+      <mode>looped</mode>
+      <condition>
+	<and>
+	  <greater-than>		
+	    <property>velocities/airspeed-kt</property>
+	    <value>20</value>
+	  </greater-than>
+	  <not>
+	    <property>sim/current-view/internal</property>
+	  </not>  
+        </and>
+      </condition>
+      <property>velocities/airspeed-kt</property>
+      <volume>
+	<property>position/altitude-ft</property>
+	<factor>-0.000015</factor>
+	<offset>1.0</offset>
+	<min>0.1</min>
+	<max>1.0</max>
+      </volume>
+      <volume>
+	<property>velocities/airspeed-kt</property>
+	<factor>0.001</factor>
+	<min>0.01</min>
+	<max>5</max>
+      </volume>
+      <pitch>
+	<property>velocities/airspeed-kt</property>
+	<factor>0.002</factor>
+	<offset>1</offset>
+      </pitch>
+      <max-dist>100</max-dist>
+    </wind>
+	
+	<crank> 
+      <name>engstart</name>
+      <path>Aircraft/General-Dynamics_F-111F/Sounds/General-Dynamics_F-111F-Start-UP.wav</path>
+      <property>/engines/engine/cranking</property>
+      <volume> 
+        <property>/orientation/alpha-deg</property>
+        <type>log</type>
+        <min>0.5</min>
+        <max>1.0</max>
+      </volume>
+      <volume> 
+        <factor>1.2</factor>
+        <max>1.0</max>
+      </volume>
+      <reference-dist>100</reference-dist>
+      <max-dist>1000</max-dist>
+    </crank>
+
+    <engine>
+      <name>Engine-Internal</name>
+      <path>Aircraft/General-Dynamics_F-111F/Sounds/General-Dynamics_F-111F-Engine-IN.wav</path>
+      <mode>looped</mode>
+      <condition>
+	<and>
+	  <property>sim/current-view/internal</property> 
+	  <greater-than>
+	    <property>/engines/engine/n2</property>
+	    <value>59</value>
+	  </greater-than>
+	  <property>sim/current-view/internal</property>
+	</and>
+      </condition> 
+      <volume>
+	<property>/engines/engine/n2</property>
+	<factor type="double">0.01</factor>
+	<min>0.001</min>
+	<max>2</max>
+      </volume>
+      <pitch>
+	<property>/engines/engine/n2</property>
+	<factor>0.01</factor>
+      </pitch>
+      <reference-dist>100</reference-dist>
+      <max-dist>1000</max-dist>
+    </engine>
+    
+    <engine>
+      <name>Engine-External</name>
+      <path>Aircraft/General-Dynamics_F-111F/Sounds/General-Dynamics_F-111F-Engine-Out.wav</path>
+      <mode>looped</mode>
+      <condition>
+	<and>
+	  <greater-than>
+	    <property>/engines/engine/n2</property>
+	    <value>59</value>
+	  </greater-than>
+	  <not>
+	    <property>sim/current-view/internal</property>
+	  </not>
+        </and>
+      </condition>
+      <position>
+	<x>15.0</x>
+	<y>0.0</y>
+	<z>0.0</z>
+      </position>
+      <orientation>
+	<x>1</x>
+	<y>0</y>
+	<z>0</z>
+	<inner-angle>150</inner-angle>
+	<outer-angle>250</outer-angle>
+	<outer-gain>0.4</outer-gain>
+      </orientation>
+      <volume>
+	<property>/engines/engine/n2</property>
+	<factor type="double">0.01</factor>
+        <min>0.1</min>
+	<max>5</max>
+      </volume>
+      <pitch>
+	<property>/engines/engine/n2</property>
+	<factor>0.01</factor>
+      </pitch>
+      <reference-dist>100</reference-dist>
+      <max-dist>1000</max-dist>
+    </engine>
+	
+	<engine-0> 
+      <name>Engine Shut Down</name>
+      <path>Aircraft/General-Dynamics_F-111F/Sounds/General-Dynamics_F-111F-Engine-Shut-Down.wav</path>
+      <condition> 
+        <property>/engines/engine/running</property>
+        <not> 
+          <property>controls/engines/engine/cutoff</property>
+        </not>
+        <less-than-equals> 
+          <property>/engines/engine/rpm</property>
+          <value>150</value>
+        </less-than-equals>
+      </condition>
+      <volume> 
+        <property>/orientation/alpha-deg</property>
+        <type>log</type>
+        <min>1.0</min>
+        <max>1.5</max>
+      </volume>
+      <volume> 
+        <property>/sim/current-view/internal</property>
+        <offset>1.0</offset>
+        <factor>-0.4</factor>
+      </volume>
+      <reference-dist>100</reference-dist>
+      <max-dist>1000</max-dist>
+    </engine-0>
+	
+	<rumble> 
+      <name>rumble</name>
+      <mode>looped</mode>
+      <path>Aircraft/General-Dynamics_F-111F/Sounds/rumble.wav</path>
+      <condition> 
+        <or> 
+          <property>/gear/gear[0]/wow</property>
+          <property>/gear/gear[1]/wow</property>
+          <property>/gear/gear[2]/wow</property>
+        </or>
+        <property>/sim/current-view/internal</property>
+      </condition>
+      <volume> 
+        <property>/velocities/airspeed-kt</property>
+        <type>log</type>
+        <factor>0.25</factor>
+      </volume>
+      <reference-dist>100</reference-dist>
+      <max-dist>1000</max-dist>
+    </rumble>
+	
+	<squeal> 
+      <name>squeal</name>
+      <path>Aircraft/General-Dynamics_F-111F/Sounds/squeal.wav</path>
+      <condition> 
+        <or> 
+          <property>/gear/gear[0]/wow</property>
+          <property>/gear/gear[1]/wow</property>
+          <property>/gear/gear[2]/wow</property>
+        </or>
+      </condition>
+      <volume> 
+        <property>/velocities/speed-down-fps</property>
+        <factor>0.5</factor>
+        <max>1.0</max>
+      </volume>
+      <volume> 
+        <property>/velocities/airspeed-kt</property>
+        <factor>0.01</factor>
+        <max>1.0</max>
+      </volume>
+      <volume> 
+        <internal>dt_stop</internal>
+        <factor>0.05</factor>
+        <max>1.0</max>
+      </volume>
+      <pitch> 
+        <property>/velocities/airspeed-kt</property>
+        <factor>0.0025</factor>
+        <offset>1.2</offset>
+      </pitch>
+      <reference-dist>100</reference-dist>
+      <max-dist>1000</max-dist>
+    </squeal>
+	
+	<stall> 
+      <name>gear up warn</name>
+      <mode>looped</mode>
+      <path>Sounds/gear-hrn.wav</path>
+      <condition> 
+        <and> 
+          <less-than-equals> 
+            <property>controls/engines/engine/throttle</property>
+            <value>0.05</value>
+          </less-than-equals>
+          <equals> 
+            <property>controls/gear/gear-down</property>
+            <value>0</value>
+          </equals>
+          <equals> 
+            <property>sim/alarms/gear-warn</property>
+            <value>0</value>
+          </equals>
+        </and>
+      </condition>
+      <property>/sim/alarms/gear-warn</property>
+      <volume> 
+        <factor>0.7</factor>
+      </volume>
+      <reference-dist>10.0</reference-dist>
+      <max-dist>20.0</max-dist>
+    </stall>
+    
+  </fx>
+
+</PropertyList>
