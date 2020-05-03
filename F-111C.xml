@@ -5,13 +5,15 @@
    xsi:noNamespaceSchemaLocation="http://jsbsim.sourceforge.net/JSBSim.xsd">
 
  <fileheader>
-  <author> Aeromatic v 0.96 </author>
+  <author> Aeromatic v 0.96 (Lachlan Eggins)</author>
   <filecreationdate>2020-04-26</filecreationdate>
   <version>$Revision: 1.20 $</version>
   <description> Models a F-111C. </description>
  </fileheader>
+  <!-- basic FDM  
+-->
 
-<!--
+   <!--
   File:     F-111C.xml
   Inputs:
     name:          F-111C
