@@ -163,7 +163,7 @@
 
  <propulsion>
 
-   <engine file="F-111C_engine">
+   <engine file="TF30-P-100">
     <location unit="IN">
       <x> 821.93 </x>
       <y> -20.00 </y>
@@ -189,7 +189,7 @@
     </thruster>
   </engine>
 
-   <engine file="F-111C_engine">
+   <engine file="TF30-P-100">
     <location unit="IN">
       <x> 821.93 </x>
       <y>  20.00 </y>
