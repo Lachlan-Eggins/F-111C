@@ -26,8 +26,8 @@
     <rating>
       <FDM type="int">1</FDM>
       <systems type="int">1</systems>
-      <cockpit type="int">3</cockpit>
-      <model type="int">3</model>
+      <cockpit type="int">1</cockpit>
+      <model type="int">1</model>
     </rating>
   </sim>
 </PropertyList>
