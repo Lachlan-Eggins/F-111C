@@ -1,7 +1,7 @@
 #------------------------------------------------------------------------------
 # Engine Show Internal Glass Part
 # Display the glass part 
-#
+# Author, Lachlan Eggins
 # This is object oriented program
 # look: http://wiki.flightgear.org/Object_oriented_programming_in_Nasal
 #------------------------------------------------------------------------------
