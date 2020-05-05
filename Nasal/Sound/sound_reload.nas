@@ -1,3 +1,4 @@
+Author, Lachlan Eggins
 var sound_reload = func {
   var sf = getprop('/tmp/sound-xml/path');
   if(sf == nil)
