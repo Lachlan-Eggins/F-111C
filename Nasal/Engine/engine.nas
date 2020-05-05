@@ -1,6 +1,6 @@
 #------------------------------------------------------------------------------
 # Propulsion system class
-#
+# Author, Lachlan Eggins
 # This is object oriented program
 # look: http://wiki.flightgear.org/Object_oriented_programming_in_Nasal
 #------------------------------------------------------------------------------
