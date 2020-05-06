@@ -1,0 +1,39 @@
+<?xml  version="1.0"?>
+
+<!-- F-111 C Variant
+   |  Lachlan Eggins: 2020-4-26
+-->
+<PropertyList include="F-111-common.xml">
+
+    <sim>
+        <description>General Dynamics F-111F Aardvark</description>
+        <minimum-fg-version>2019.1</minimum-fg-version>
+        <status>production</status>
+		
+        <previews>
+            <preview>
+                <type>exterior</type>
+                <splash type="bool">true</splash>
+                <path>Aircraft/F-111C/Previews/F-111_1.jpg</path>
+            </preview>
+        </previews>
+		
+        <flight-model>jsb</flight-model>
+        <aero>F-111F</aero>
+		
+        <model>
+            <path>Aircraft/F-111C/Models/F-111F.xml</path>
+            <F-111C>
+                <variant>F</variant>
+            </F-111C>
+        </model>
+		
+        <rating>
+            <FDM type="int">1</FDM>
+            <systems type="int">1</systems>
+            <cockpit type="int">1</cockpit>
+            <model type="int">1</model>
+        </rating>
+    </sim>
+    
+</PropertyList>

@@ -1,0 +1,1054 @@
+<?xml version="1.0"?>
+<!-- F-111C 
+   | Authors:
+   | Lachlan Eggins 3/5/2020
+
+-->
+<PropertyList include="Aircraft/Generic/Human/Include/walker-include.xml">
+    <sim>
+        <author>Lachlan Eggins, Zac (3d), Jonathan Redpath, J Mav 16</author>
+        <status>production</status>
+
+        <tags>
+            <tag>fighter</tag>
+            <tag>jet</tag>
+            <tag>twin-engine</tag>
+            <tag>retractable-gear</tag>
+            <tag>ifr</tag>
+        </tags>
+		
+		<flight-recorder>
+            <replay-config type="int">0</replay-config>
+            <config n="0">
+                <name type="string">F-111 Flight Recorder</name>
+                <signals include="/Aircraft/Generic/flightrecorder/components/environment.xml"/>
+                <signals include="/Aircraft/Generic/flightrecorder/components/position.xml"/>
+                <signals include="/Aircraft/Generic/flightrecorder/components/controls.xml"/>
+                <signals include="/Aircraft/Generic/flightrecorder/components/surfaces.xml"/>
+                <signals include="/Aircraft/Generic/flightrecorder/components/engine-jet.xml">
+                    <count type="int">2</count>
+                </signals>
+                <signals include="/Aircraft/Generic/flightrecorder/components/faults-engines.xml">
+                    <count type="int">2</count>
+                </signals>
+                <signals include="/Aircraft/Generic/flightrecorder/components/tanks.xml">
+                    <count type="int">12</count>
+                </signals>
+                <signals include="/Aircraft/Generic/flightrecorder/components/gear-retractable.xml">
+                    <count type="int">3</count>
+                </signals>
+			</config>
+		</flight-recorder>
+		
+		<help>
+            <title>General Dynamics F-111 Aardvark</title>
+            <key>
+                <name>Home</name>
+                <desc>Increase elevator trim</desc>
+            </key>
+            <key>
+                <name>End</name>
+                <desc>Decrease elevator trim</desc>
+            </key>
+            <key>
+                <name>E</name>
+                <desc>Decrease Radar Range</desc>
+            </key>
+            <key>
+                <name>o</name>
+                <desc>toggle arrester hook</desc>
+            </key>
+            <key>
+                <name>R</name>
+                <desc>Increase Radar Range</desc>
+            </key>
+            <key>
+                <name>c</name>
+                <desc>Open/Close canopy</desc>
+            </key>
+
+            <line>__________________________________________________</line>
+
+            
+            <key>
+                <name>q</name>
+                <desc>Toggle Radar Standby Mode</desc>
+            </key>
+            <key>
+                <name>m</name>
+                <desc>Cycle Stick Weapon Mode Selector</desc>
+            </key>
+            <key>
+                <name>Ctrl-w</name>
+                <desc>Cycle through Master Arm modes</desc>
+            </key>
+            <key>
+                <name>e</name>
+                <desc>Fire guns / missiles</desc>
+            </key>
+            <key>
+                <name>Ctrl-v</name>
+                <desc>Back to Pilot's View or toggle Pilot's and Backseat View.</desc>
+            </key>
+            <key>
+                <name>y/Y</name>
+                <desc>Select next/prev target (by distance).</desc>
+            </key>
+            <key>
+                <name>Ctrl-q</name>
+                <desc>Release chaff/flare</desc>
+                <line>__________________________________________________</line>
+			</key>
+        </help>
+		
+        <!--<hud>
+            <visibility n="1">false</visibility>
+        </hud> uncomment when aircraft flyable -->
+		
+		<instrumentation>
+            <path>Aircraft/F-111C/Systems/instrumentation.xml</path>
+        </instrumentation>
+		
+		<menubar>
+            <default>
+                <menu n="50">
+                    <label>F-111C</label>
+                    <item n="0">
+                        <label>Repair Airframe</label>
+                        <binding>
+                            <command>nasal</command>
+                            <script>aircraft.fixAirframe();aircraft.ct("rp");</script>
+                        </binding>
+                    </item>
+                    <item n="1">
+                        <label>Fuel and Stores</label>
+                        <binding>
+                            <command>nasal</command>
+                            <script>aircraft.ext_loads_dlg.open()</script>
+                        </binding>
+                    </item>
+                    <item n="2">
+                        <label>Liveries</label>
+                        <binding>
+                            <command>nasal</command>
+                            <script>aircraft.livery.dialog.toggle()</script>
+                        </binding>
+                    </item>
+                    <!--
+					<item n="4">
+						<label>Select MP back seater</label>
+						<binding>
+							<command>nasal</command>
+							<script>
+								dual_control_tools.copilot_dialog.show(aircraft_dual_control.copilot_type);
+							</script>
+						</binding>
+					</item>
+-->
+                    <item n="6">
+                        <label>Quickstart</label>
+                        <binding>
+                            <command>nasal</command>
+                            <script>aircraft.quickstart()</script>
+                        </binding>
+                    </item>
+                    <item n="7">
+                        <label>Cold and Dark</label>
+                        <binding>
+                            <command>nasal</command>
+                            <script>aircraft.cold_and_dark()</script>
+                        </binding>
+                    </item>
+                    <item n="8">
+                        <label>Ground Services</label>
+                        <binding>
+                            <command>nasal</command>
+                            <script>aircraft.dlg_ground_services.open()</script>
+                        </binding>
+                    </item>
+                    <item n="9">
+                        <label>Aircraft Lighting</label>
+                        <binding>
+                            <command>nasal</command>
+                            <script>aircraft.dlg_lighting.open()</script>
+                        </binding>
+                    </item>
+                </menu>
+            </default>
+        </menubar>
+		
+		<model>
+            <fallback-model-index type="int">515</fallback-model-index>
+		</model>
+		
+        <multiplay>
+            <visibility-range-nm type="int">200</visibility-range-nm>
+        </multiplay>
+		
+        <rendering>
+            <camera-group>
+                <znear type="double">0.20</znear>
+            </camera-group>
+            <redout>
+                <enabled type="bool" userarchive="n" archive="n">true</enabled>
+                <parameters>
+                    <blackout-onset-g type="double">5</blackout-onset-g>
+                    <blackout-complete-g type="double">8</blackout-complete-g>
+                    <onset-blackout-sec type="double">300</onset-blackout-sec>
+                    <fast-blackout-sec type="double">30</fast-blackout-sec>
+                    <redout-onset-g type="double">-1.5</redout-onset-g>
+                    <redout-complete-g type="double">-4</redout-complete-g>
+                    <onset-redout-sec type="double">45</onset-redout-sec>
+                    <fast-redout-sec type="double">3.5</fast-redout-sec>
+                    <recover-fast-sec type="double">7</recover-fast-sec>
+                    <recover-slow-sec type="double">15</recover-slow-sec>
+                </parameters>
+            </redout>
+        </rendering>
+		
+		<sound>
+            <path>Aircraft/F-111C/sound.xml</path>
+        </sound>
+
+        <submodels>
+            <serviceable>true</serviceable>
+            <path>submodels.xml</path>
+        </submodels>
+		
+        <systems>
+           <!-- <autopilot n="0">
+                <path>Aircraft/F-111C/Systems/autoflight-rules.xml</path>
+            </autopilot>-->
+        </systems>
+		
+		<view n="0">
+            <name>Cockpit View</name>
+            <type>lookfrom</type>
+            <internal archive="y">true</internal>
+            <config>
+                <!-- -0.001565762004 -->
+                <x-offset-m archive="y">0.0</x-offset-m>
+                <!--<y-offset-m archive="y">1.4874214034</y-offset-m>-->
+                <y-offset-m archive="y">1.401951318</y-offset-m>
+                <z-offset-m archive="y">-5</z-offset-m>
+                <pitch-offset-deg>-8</pitch-offset-deg>
+                <default-field-of-view-deg>85</default-field-of-view-deg>
+                <limits>
+                    <enabled type="bool">true</enabled>
+                    <left>
+                        <heading-max-deg type="double">180</heading-max-deg>
+                        <x-offset-max-m type="double">0.25</x-offset-max-m>
+                        <x-offset-threshold-deg type="double">25</x-offset-threshold-deg>
+                    </left>
+                    <right>
+                        <heading-max-deg type="double">180</heading-max-deg>
+                        <x-offset-max-m type="double">0.25</x-offset-max-m>
+                        <x-offset-threshold-deg type="double">25</x-offset-threshold-deg>
+                    </right>
+                </limits>
+            </config>
+        </view>
+        <view n="1">
+            <config>
+                <target-z-offset-m archive="y" type="double">0</target-z-offset-m>
+                <pitch-offset-deg>0</pitch-offset-deg>
+            </config>
+        </view>
+        <view n="2">
+            <config>
+                <y-offset-m archive="y" type="double">6.0</y-offset-m>
+                <z-offset-m archive="y">-19.7</z-offset-m>
+                <target-z-offset-m archive="y" type="double">0.0</target-z-offset-m>
+            </config>
+        </view>
+        <view n="3">
+            <config>
+                <target-z-offset-m archive="y" type="double">0.0</target-z-offset-m>
+            </config>
+        </view>
+        <view n="4">
+            <config>
+                <target-z-offset-m archive="y" type="double">0.0</target-z-offset-m>
+            </config>
+        </view>
+        <view n="5">
+            <config>
+                <target-z-offset-m archive="y" type="double">0.0</target-z-offset-m>
+            </config>
+        </view>
+        <view n="6">
+            <config>
+                <target-z-offset-m archive="y" type="double">0.0</target-z-offset-m>
+            </config>
+        </view>
+        <view n="109">
+            <name>Wingman View</name>
+            <type>lookat</type>
+            <internal archive="y">true</internal>
+            <config>
+                <from-model type="bool">false</from-model>
+                <from-model-idx type="int">0</from-model-idx>
+                <eye-lat-deg-path>/position/latitude-deg</eye-lat-deg-path>
+                <eye-lon-deg-path>/position/longitude-deg</eye-lon-deg-path>
+                <eye-alt-ft-path>/position/altitude-ft</eye-alt-ft-path>
+                <eye-heading-deg-path>/orientation/heading-deg</eye-heading-deg-path>
+                <eye-pitch-deg-path>/orientation/pitch-deg</eye-pitch-deg-path>
+                <eye-roll-deg-path>/orientation/roll-deg</eye-roll-deg-path>
+                <at-model type="bool">true</at-model>
+                <at-model-idx type="int">0</at-model-idx>
+                <at-model-roll-damping type="double">2.0</at-model-roll-damping>
+                <at-model-pitch-damping type="double">2.0</at-model-pitch-damping>
+                <at-model-heading-damping type="double">2.0</at-model-heading-damping>
+                <target-x-offset-m type="double">0</target-x-offset-m>
+                <target-y-offset-m type="double">0</target-y-offset-m>
+                <target-z-offset-m type="double">0</target-z-offset-m>
+                <default-field-of-view-deg type="double">55.0</default-field-of-view-deg>
+                <pitch-offset-deg type="double">0</pitch-offset-deg>
+                <heading-offset-deg type="double">0</heading-offset-deg>
+                <roll-offset-deg type="double">0</roll-offset-deg>
+                <x-offset-m type="double">15</x-offset-m>
+                <!-- left(+)/right(-) -->
+                <y-offset-m type="double">0</y-offset-m>
+                <!-- up(+)/down(-) -->
+                <z-offset-m type="double">-13</z-offset-m>
+                <!-- fore(+)/aft(-) -->
+            </config>
+        </view>
+    </sim>
+	
+	 <accelerations>
+        <pilot-g>1</pilot-g>
+    </accelerations>
+	
+	<controls>
+        <armament>
+            <trigger type="bool">false</trigger>
+            <cycle-mode type="bool">false</cycle-mode>
+            <master-arm type="bool">false</master-arm>
+            <selected-armament type="string"/>
+        </armament>
+    </controls>
+	
+	<consumables>
+        <fuel>
+            <tank n="0">
+                <name>L Feed</name>
+                <kill-when-empty type="bool">false</kill-when-empty>
+            </tank>
+            <tank n="1">
+                <name>R Feed</name>
+                <kill-when-empty type="bool">false</kill-when-empty>
+            </tank>
+            <tank n="2">
+                <name>Tank 1</name>
+                <kill-when-empty type="bool">false</kill-when-empty>
+            </tank>
+            <tank n="3">
+                <name>Internal Wing L</name>
+                <kill-when-empty type="bool">false</kill-when-empty>
+            </tank>
+            <tank n="4">
+                <name>Internal Wing R</name>
+                <kill-when-empty type="bool">false</kill-when-empty>
+            </tank>
+            <tank n="5">
+                <name>External Wing L</name>
+                <kill-when-empty type="bool">false</kill-when-empty>
+                <selected type="bool">false</selected >
+            </tank>
+            <tank n="6">
+                <name>External Wing R</name>
+                <kill-when-empty type="bool">false</kill-when-empty>
+                <selected type="bool">false</selected >
+            </tank>
+            <tank n="7">
+                <name>Centre External</name>
+                <kill-when-empty type="bool">false</kill-when-empty>
+                <selected type="bool">false</selected >
+            </tank>
+            <tank n="8">
+                <name>L feed line</name>
+                <kill-when-empty type="bool">false</kill-when-empty>
+                <selected type="bool">false</selected>
+            </tank>
+            <tank n="9">
+                <name>R feed line</name>
+                <kill-when-empty type="bool">false</kill-when-empty>
+                <selected type="bool">false</selected>
+            </tank>
+        </fuel>
+    </consumables>
+	
+	<engines>
+        <engine n="0">
+            <running>true</running>
+        </engine>
+        <engine n="1">
+            <running>true</running>
+        </engine>
+    </engines>
+	
+	<instrumentation>
+        <tacan>
+            <switch-position type="int">1</switch-position>
+        </tacan>
+        <radar>
+            <az-field type="double">120</az-field>
+            <enabled type="bool">true</enabled>
+            <range type="double">120</range>
+            <radar2-range type="double">50</radar2-range>
+            <radar-standby type="bool">0</radar-standby>
+            <symbols-enabled type="bool">true</symbols-enabled>
+            <debug-mode type="bool">true</debug-mode>
+            <serviceable type="bool">true</serviceable>
+            <radar-mode type="int">1</radar-mode>
+        </radar>
+        <ecm>
+            <enabled type="bool">true</enabled>
+            <on-off type="bool">true</on-off>
+        </ecm>
+        <nav>
+            <frequencies>
+                <selected-freq type="double">115.8</selected-freq>
+                <standby-freq type="double">115.8</standby-freq>
+            </frequencies>
+        </nav>
+    </instrumentation>
+	
+	 <input>
+        <!--		<keyboard n="0" include="/Input/Keyboard/carrier-bindings.xml"> -->
+        <keyboard n="0" >
+            <multikey include="Systems/instruments-multikey.xml"/>
+
+            <key n="1">
+                <name>CTRL-a</name>
+                <desc>Toggle autopilot altitude mode.</desc>
+                <binding>
+                    <command>property-toggle</command>
+                    <property>sim/model/f15/controls/AFCS/alt-hold</property>
+                </binding>
+            </key>
+
+            <key n="4">
+                <name>CTRL-d</name>
+                <desc>Radar mode.</desc>
+                <binding>
+                    <command>nasal</command>
+                    <script>awg_9.radar_mode_cycle()</script>
+                </binding>
+            </key>
+
+            <key n="8">
+                <name>CTRL-h</name>
+                <desc>Toggle autopilot heading mode.</desc>
+                <binding>
+                    <command>nasal</command>
+                    <script>aircraft.afcs_heading_switch(0);</script>
+                </binding>
+            </key>
+
+            <key n="14">
+                <name>Ctrl-n</name>
+                <desc>Toggle Radar PULSE SRCH / TWS AUTO Modes</desc>
+                <binding>
+                    <command>nasal</command>
+                    <script>awg_9.wcs_mode_toggle()</script>
+                </binding>
+            </key>
+
+            <key n="19">
+                <name>Ctrl-s</name>
+                <desc>Toggle Auto Throttle hold</desc>
+                <binding>
+                    <command>nasal</command>
+                    <script>aircraft.toggleAutoThrottle();</script>
+                </binding>
+            </key>
+
+            <key n="20">
+                <name>Ctrl-t</name>
+                <desc>Toggle autopilot attitude mode</desc>
+                <binding>
+                    <command>property-toggle</command>
+                    <property>sim/model/f15/controls/AFCS/att-hold</property>
+                </binding>
+            </key>
+
+            <key n="22">
+                <name>Ctrl-v</name>
+                <desc>Select pilot's view (view 0) or toggle between pilot's and RIO's view</desc>
+                <binding>
+                    <command>nasal</command>
+                    <script>aircraft.toggle_cockpit_views();</script>
+                </binding>
+            </key>
+
+            <key n="23">
+                <name>Ctrl-w</name>
+                <desc>Cycle through MasterArm modes</desc>
+                <binding>
+                    <command>nasal</command>
+                    <script>aircraft.master_arm_cycle();</script>
+                </binding>
+            </key>
+
+            <key n="42">
+                <name>*</name>
+                <desc>Nose wheel steering maneuvering toggle</desc>
+                <binding>
+                    <command>nasal</command>
+                    <script type="string">
+                        <![CDATA[ 
+                            if (getprop("fdm/jsbsim/fcs/steer-maneuver"))
+                            {
+                                gui.popupTip("Maneuver NWS disabled");
+                                setprop("fdm/jsbsim/fcs/steer-maneuver",0)
+                            }
+                            else
+                            {
+                                gui.popupTip("Maneuver NWS enabled");
+                                setprop("fdm/jsbsim/fcs/steer-maneuver",1)
+                            }
+                    ]]>
+                    </script>
+                </binding>
+            </key>
+
+
+                      <!-- map keys for catapult launch -->
+            <key n="67">
+                <name>C</name>
+                <desc>Catapult Launch Command.</desc>
+                <binding>
+                    <command>nasal</command>
+                    <script>
+                        if (getprop("fdm/jsbsim/systems/holdback/holdback-cmd"))
+                        {
+                        print("Catapult launch");
+                        setprop("fdm/jsbsim/systems/catapult/cat-launch-cmd",1);
+                        setprop("fdm/jsbsim/systems/holdback/holdback-cmd",0);
+                        }
+                        else
+                        {
+                        }
+                    </script>
+                </binding>
+            </key>
+                <key n="69">
+                <name>E</name>
+                <desc>Decrease Radar Range</desc>
+                <binding>
+                    <command>nasal</command>
+                    <script>awg_9.range_control(-1);</script>
+                </binding>
+            </key>
+
+            <key n="70">
+                <name>F</name>
+                <desc>Raise flaps</desc>
+                <binding>
+                    <command>nasal</command>
+                    <script>aircraft.raiseFlaps();</script>
+                </binding>
+            </key>
+
+			<!-- map keys for launch-bar -->
+            <key n="76">
+                <name>L</name>
+                <desc>Launch-bar engage.</desc>
+                <binding>
+                    <command>nasal</command>
+                    <script>
+                        if (getprop("fdm/jsbsim/systems/holdback/holdback-cmd"))
+                        {
+                        print("Disengage launchbar");
+                        setprop("fdm/jsbsim/systems/catapult/cat-launch-cmd",0);
+                        setprop("fdm/jsbsim/systems/holdback/holdback-cmd",0);
+                        setprop("controls/gear/brake-parking",1);
+                        }
+                        else
+                        {
+                        print("Engage launchbar");
+                        setprop("fdm/jsbsim/systems/catapult/cat-launch-cmd",0);
+                        setprop("fdm/jsbsim/systems/holdback/holdback-cmd",1);
+                        setprop("controls/gear/brake-parking",0);
+                        }
+                    </script>
+                </binding>
+            </key>
+            <key n="81">
+                <name>Q</name>
+                <desc>Reset view</desc>
+                <binding>
+                    <command>nasal</command>
+                    <script>aircraft.resetView();</script>
+                </binding>
+            </key>
+            <key n="82">
+                <name>R</name>
+                <desc>Increase Radar Range</desc>
+                <binding>
+                    <command>nasal</command>
+                    <script>awg_9.range_control(1);</script>
+                </binding>
+            </key>
+
+            <key n="99">
+                <name>c</name>
+                <desc>Open canopy</desc>
+                <binding>
+                    <command>property-toggle</command>
+                    <property>fdm/jsbsim/systems/ecs/canopy-position-dmd</property>
+                </binding>
+            </key>
+
+            <key n="101">
+                <name>e</name>
+                <desc>Trigger M61A1 Vulcan or AIM-9s</desc>
+                <binding>
+                    <command>property-assign</command>
+                    <property>controls/armament/trigger</property>
+                    <value>true</value>
+                </binding>
+                <mod-up>
+                    <binding>
+                        <command>property-assign</command>
+                        <property>controls/armament/trigger</property>
+                        <value>false</value>
+                    </binding>
+                </mod-up>
+            </key>
+
+            <key n="104">
+                <name>h</name>
+                <desc>HUD Cycle</desc>
+                <binding>
+                    <command>nasal</command>
+                    <script type="string">
+                        <![CDATA[ 
+                        if(getprop("sim/hud/visibility[1]"))
+                        {
+                            setprop("sim/hud/visibility[0]",0);
+                            setprop("sim/hud/visibility[1]",0);
+                        }
+                        else
+                        {
+                            setprop("sim/hud/visibility[0]",1);
+                            setprop("sim/hud/visibility[1]",1);
+                        }
+                        ]]>
+                    </script>
+                </binding>
+            </key>
+
+            <key n="111">
+                <name>o</name>
+                <desc>Toggle arrester hook</desc>
+                <binding>
+                    <command>property-toggle</command>
+                    <property>fdm/jsbsim/systems/hook/tailhook-cmd-norm</property>
+                </binding>
+            </key>
+            <key n="113">
+                <name>q</name>
+                <desc>Toggle radar standby mode</desc>
+                <binding>
+                    <command>nasal</command>
+                    <script>awg_9.toggle_radar_standby();</script>
+                </binding>
+            </key>
+
+            <key n="17">
+                <name>ctrl-q</name>
+                <desc>Trigger flare release</desc>
+                <binding>
+                    <command>property-toggle</command>
+                    <property>/ai/submodels/submodel[5]/flare-release-cmd</property>
+                    <value type="bool">true</value>
+                </binding>
+            </key>
+
+ 
+            <key n="109">
+                <name>m</name>
+                <desc>Cycle Weapon Mode Selector</desc>
+                <binding>
+                    <command>property-adjust</command>
+                    <property>sim/model/f15/controls/armament/weapon-selector</property>
+                    <step>1</step>
+                    <min>0</min>
+                    <max>3</max>
+                    <repeat>false</repeat>
+                    <wrap>true</wrap>
+                </binding>
+            </key>
+            <key n="121">
+                <name>y</name>
+                <desc>Next target select</desc>
+                <binding>
+                    <command>property-assign</command>
+                    <property>sim/model/f15/instrumentation/radar-awg-9/select-target</property>
+                    <value>1</value>
+                </binding>
+            </key>
+
+            <key n="89">
+                <name>Y</name>
+                <desc>Previous target select</desc>
+                <binding>
+                    <command>property-assign</command>
+                    <property>sim/model/f15/instrumentation/radar-awg-9/select-target</property>
+                    <value>-1</value>
+                </binding>
+            </key>
+
+            <key n="362">
+                <name>Home</name>
+                <desc>Increase elevator trim</desc>
+                <binding>
+                    <command>nasal</command>
+                    <script>aircraft.trimUp();</script>
+                </binding>
+            </key>
+
+            <key n="363">
+                <name>End</name>
+                <desc>Decrease elevator trim</desc>
+                <binding>
+                    <command>nasal</command>
+                    <script>aircraft.trimDown();</script>
+                </binding>
+            </key>
+
+            <key n="21">
+              <name>Ctrl-U</name>
+              <desc>[Cheat] Add 1000ft of emergency altitude</desc>
+              <binding>
+               <command>property-adjust</command>
+               <property>/position/altitude-ft</property>
+               <step type="double">1000.0</step>
+              </binding>
+              <binding>
+               <command>property-assign</command>
+               <property>/sim/startup/onground</property>
+               <value type="bool">false</value>
+              </binding>
+              <binding>
+               <command>nasal</command>
+               <script>aircraft.ct("c-u")</script>
+              </binding>
+             </key>
+
+             <key n="97">
+              <name>a</name>
+              <desc>Increase speed-up</desc>
+                <binding>
+                    <command>nasal</command>
+                    <script>controls.speedup(1);</script>
+                </binding>
+                <binding>
+               <command>nasal</command>
+               <script>aircraft.ct("a")</script>
+              </binding>
+             </key>
+
+             <key n="65">
+              <name>A</name>
+              <desc>Decrease speed-up</desc>
+              <binding>
+                <command>nasal</command>
+                <script>controls.speedup(-1);</script>
+              </binding>
+              <binding>
+               <command>nasal</command>
+               <script>aircraft.ct("a")</script>
+              </binding>
+             </key>
+        </keyboard>
+    </input>
+	
+	<limits>
+        <mass-and-balance>
+            <maximum-takeoff-mass-lbs>110,002</maximum-takeoff-mass-lbs>
+        </mass-and-balance>
+
+        <vne>1100</vne>
+
+        <max-gear-extension-speed>300</max-gear-extension-speed>
+        <max-flap-extension-speed>
+            <flaps>0.4857142857142857</flaps>
+            <speed>250</speed>
+        </max-flap-extension-speed>
+    </limits>
+	
+	<payload> 
+        <armament>
+            <models type="string">Aircraft/F-111C/Models/Stores/</models>
+            <modelsUseCase type="bool">true</modelsUseCase>
+            <modelsUpperCase type="bool">true</modelsUpperCase>
+            <msg alias="/sim/model/f15/systems/armament/mp-messaging"/>
+            <pylon-offset type="int">0</pylon-offset>
+            <pylon-stations>sim/model/f15/systems/external-loads</pylon-stations>
+            <station-name type="string">station</station-name>
+            <hit-interpolation type="bool">true</hit-interpolation>
+            <MP-lat type="string">rotors/main/blade[0]/flap-deg</MP-lat>
+            <MP-lon type="string">rotors/main/blade[1]/flap-deg</MP-lon>
+            <MP-alt type="string">rotors/main/blade[2]/flap-deg</MP-alt>
+            <aim-9>
+                <guidance type="string">heat</guidance>
+                <navigation type="string">APN</navigation>
+                <class type="string">A</class>
+                <vol-search type="double">0.075</vol-search>
+                <vol-track type="double">0.25</vol-track>
+                <vol-track-weak type="double">0.175</vol-track-weak>
+                <max-fire-range-nm type="int">9.7</max-fire-range-nm><!--FIXME: up to 10-16 MN with best conditions-->
+                <min-fire-range-nm type="double">0.2</min-fire-range-nm>
+                <FCS-field-deg type="int">55</FCS-field-deg>
+                <seeker-field-deg type="int">82</seeker-field-deg>                 <!-- source: 40 deg gyro + 1 deg searcher-beam-width -->
+                <max-g type="int">32</max-g><!-- In turn -->
+                <thrust-lbf-stage-1 type="double">2660</thrust-lbf-stage-1><!-- guess -->
+                <thrust-lbf-stage-2 type="double">0.0</thrust-lbf-stage-2>    <!-- authentic -->
+                <stage-1-duration-sec type="double">5.23</stage-1-duration-sec><!-- guess -->
+                <stage-2-duration-sec type="double">0.0</stage-2-duration-sec><!-- Aim-9L -->
+                <self-destruct-time-sec type="double">43</self-destruct-time-sec><!-- guess --><!-- Mk.36 Mod.7,8 -->
+                <weight-launch-lbs>186.2</weight-launch-lbs>
+                <weight-warhead-lbs>20.8</weight-warhead-lbs>
+                <weight-fuel-lbm>60.4</weight-fuel-lbm>
+                <drag-coeff type="double">0.55</drag-coeff><!-- guess -->
+                <cross-section-sqft type="double">0.143</cross-section-sqft><!-- sq ft -->
+                <seeker-angular-speed-dps>30</seeker-angular-speed-dps><!-- deg/sec guess-->
+                <loft-altitude>0</loft-altitude><!-- in stage 1 it will attempt to climb to this altitude -->
+                <min-speed-for-guiding-mach type="double">0.8</min-speed-for-guiding-mach>
+                <arming-time-sec type="double">1.4</arming-time-sec>
+                <rail type="bool">true</rail>
+                <rail-length-m type="double">2.667</rail-length-m><!-- 16S210 AIM-9 Missile Launcher -->
+                <rail-point-forward type="bool">true</rail-point-forward>
+                <max-report-distance type="double">65</max-report-distance>
+                <lock-on-sun-deg type="double">5</lock-on-sun-deg> <!-- source -->
+                <fire-msg type="string">Fox 2</fire-msg>
+                <telemetry type="bool">false</telemetry>
+                <DLZ type="bool">true</DLZ>
+                <DLZ-optimal-alt-feet type="double">25000</DLZ-optimal-alt-feet>
+                <DLZ-optimal-closing-mach type="double">2.0</DLZ-optimal-closing-mach>
+            </aim-9>
+            <aim-120>
+                <!--Based on values from Fabien's loading_missiles:
+                AIM 120 max range 72 km for actual version. ->39 nm.. at mach 4 it's about 53 sec. I put a life of 115, and thurst duration oo 3/4 the travel time.-->
+                <guidance type="string">radar</guidance>
+                <vol-search type="double">0.00</vol-search>
+                <vol-track type="double">0.15</vol-track>
+                <vol-track-weak type="double">0.1</vol-track-weak>
+                <max-fire-range-nm type="int">38.8</max-fire-range-nm>
+                <min-fire-range-nm type="double">0.35</min-fire-range-nm>
+                <FCS-field-deg type="int">30</FCS-field-deg>
+                <seeker-field-deg type="int">135</seeker-field-deg>
+                <max-g type="int">30</max-g>
+                <thrust-lbf-stage-1 type="double">2700</thrust-lbf-stage-1><!-- guess -->
+                <thrust-lbf-stage-2 type="double">280</thrust-lbf-stage-2>    <!-- guess -->
+                <stage-1-duration-sec type="double">10.0</stage-1-duration-sec><!-- guess -->
+                <stage-2-duration-sec type="double">18.0</stage-2-duration-sec><!-- guess -->
+                <self-destruct-time-sec type="double">110</self-destruct-time-sec><!-- guess -->
+                <weight-launch-lbs>291</weight-launch-lbs>
+                <weight-warhead-lbs>44</weight-warhead-lbs>
+                <weight-fuel-lbm type="double">130</weight-fuel-lbm>
+                <drag-coeff type="double">0.2</drag-coeff>
+                <cross-section-sqft type="double">0.2739</cross-section-sqft>
+                <loft-altitude>50000</loft-altitude><!-- in stage 1 it will attempt to climb to this altitude -->
+                <min-speed-for-guiding-mach type="double">0.7</min-speed-for-guiding-mach>
+                <max-report-distance type="double">65</max-report-distance>
+                <arming-time-sec type="double">1.6</arming-time-sec>
+                <rail type="bool">false</rail>
+                <navigation type="string">APN</navigation>
+                <class type="string">A</class>
+                <fire-msg type="string">Fox 3</fire-msg>
+                <telemetry type="bool">false</telemetry><!-- enable for aim 120 to see datalink info -->
+                <DLZ type="bool">true</DLZ>
+                <DLZ-optimal-alt-feet type="double">30000</DLZ-optimal-alt-feet>
+                <DLZ-optimal-closing-mach type="double">2.0</DLZ-optimal-closing-mach>
+            </aim-120>
+            <aim-7>
+                <!-- AIM-7 F/M http://www.hill.af.mil/library/factsheets/factsheet.asp?id=5787
+                     http://warfare.be/db/lang/rus/catid/348/linkid/2517/
+                     Power Plant Hercules MK-58 solid-propellant rocket motor
+                        Thrust Classified
+                        Speed Classified
+                        Range approximately 30 nm
+                        Length 12 feet (3.64 meters)
+                        Diameter 8 inches (0.20 meters)
+                        Wingspan 3 feet, 4 inches (1 meter)
+                        Warhead Annular blast fragmentation warhead
+                        88 lbs high explosive for AIM-9H
+                        Launch Weight Approximately 500 pounds (225 kilograms)
+                        Guidance System Raytheon semiactive on either continuous wave or pulsed Doppler radar energy
+                        Date Deployed 1976
+                        Aircraft Platforms Navy: F-14 and F/A-18;
+                        Air Force: F-4, F-111C, and F-16;
+                        Marine Corps: F-4 and F/A-18
+
+                        Unit Cost Approximately $125,000
+                        Inventory Classified
+
+                        Data for AIM-7A/C/E/F/M/P and RIM-7M/P:
+
+                        AAM-N-2 (AIM-7A) AIM-7C AIM-7E AIM-7F AIM-7M/P RIM-7M/P
+                        Length 3.74 m (147.3 in) 3.66 m (144 in)
+                        Wingspan 0.94 m (37 in) 1.02 m (40 in)
+                        Finspan 0.88 m (34.8 in) 0.81 m (32 in) 0.62 m (24.3 in)
+                        Diameter 0.203 m (8 in)
+                        Weight 143 kg (315 lb) 172 kg (380 lb) 197 kg (435 lb) 231 kg (510 lb)
+                        Speed Mach 2.5 Mach 4
+                        Range 10 km (5.4 nm) 11 km (6 nm) 30 km (16 nm) 70 km (38 nm) 26 km (14 nm)
+                        Propulsion Aerojet 1.8KS7800 solid rocket Rocketdyne MK 38/MK 52
+                        solid rocket Hercules MK 58 dual-thrust solid rocket
+                        Warhead 20 kg (45 lb) 30 kg (65 lb) MK 38 continuous rod 39 kg (86 lb) MK 71
+                        continuous rod 40 kg (88 lb) WDU-27/B
+                        blast-fragmentation
+                     -->
+                <guidance type="string">semi-radar</guidance>
+                <vol-search type="double">0.00</vol-search>
+                <vol-track type="double">0.15</vol-track>
+                <vol-track-weak type="double">0.1</vol-track-weak>
+                <max-fire-range-nm type="int">22</max-fire-range-nm><!-- authentic 21.5 for 2m2 RCS -->
+                <min-fire-range-nm type="double">0.16</min-fire-range-nm>
+                <FCS-field-deg type="int">25</FCS-field-deg>
+                <seeker-field-deg type="int">110</seeker-field-deg>
+                <max-g type="int">20</max-g>
+                <thrust-lbf-stage-1 type="double">5750</thrust-lbf-stage-1><!-- authentic -->
+                <thrust-lbf-stage-2 type="double">1018</thrust-lbf-stage-2>    <!-- authentic -->
+                <stage-1-duration-sec type="double">4.5</stage-1-duration-sec><!-- authentic -->
+                <stage-2-duration-sec type="double">11</stage-2-duration-sec><!-- authentic -->
+                <self-destruct-time-sec type="double">75</self-destruct-time-sec><!-- authentic -->
+                <weight-launch-lbs type="double">510</weight-launch-lbs>                       <!-- authentic -->
+                <weight-warhead-lbs type="double">88</weight-warhead-lbs>
+                <weight-fuel-lbm type="double">135</weight-fuel-lbm>
+                <drag-coeff type="double">0.25</drag-coeff>
+                <cross-section-sqft type="double">0.3382</cross-section-sqft>
+                <loft-altitude type="int">30000</loft-altitude><!-- in stage 1 it will attempt to climb to this altitude -->
+                <min-speed-for-guiding-mach type="double">0.7</min-speed-for-guiding-mach>
+                <arming-time-sec type="double">2.5</arming-time-sec>             <!-- authentic -->
+                <max-report-distance type="double">65</max-report-distance>
+                <navigation type="string">APN</navigation>
+                <rail type="bool">false</rail>
+                <class type="string">A</class>
+                <fire-msg>Fox 1</fire-msg>
+                <telemetry type="bool">false</telemetry>
+                <DLZ type="bool">true</DLZ>
+                <DLZ-optimal-alt-feet type="double">30000</DLZ-optimal-alt-feet>
+                <DLZ-optimal-closing-mach type="double">2.0</DLZ-optimal-closing-mach>
+            </aim-7>
+            <mk-84>
+                <short-name type="string">MK84</short-name>
+                <long-name type="string">MK-84 General Purpose Bomb</long-name>
+                <fire-msg type="string">Bombs away</fire-msg>
+                <class type="string">GM</class>
+                <max-fire-range-nm type="double"> 8 </max-fire-range-nm>
+                <min-fire-range-nm type="double"> 0 </min-fire-range-nm>
+                <guidance type="string">laser</guidance>
+                <navigation type="string">direct</navigation>
+                <loft-altitude type="int"> 0 </loft-altitude>
+                <terrain-follow type="bool">false</terrain-follow>
+                <FCS-field-deg type="int"> 240 </FCS-field-deg>
+                <seeker-field-deg type="int"> 360 </seeker-field-deg>
+                <max-g type="double"> 1.5 </max-g>
+                <thrust-lbf-stage-1 type="double"> 0 </thrust-lbf-stage-1>
+                <thrust-lbf-stage-2 type="double"> 0 </thrust-lbf-stage-2>
+                <stage-1-duration-sec type="double"> 0 </stage-1-duration-sec>
+                <stage-2-duration-sec type="double"> 0 </stage-2-duration-sec>
+                <weight-launch-lbs type="double"> 500 </weight-launch-lbs>
+                <weight-warhead-lbs type="double"> 190 </weight-warhead-lbs>
+                <weight-fuel-lbm type="double"> 0 </weight-fuel-lbm>
+                <drag-coeff type="double"> 0.012 </drag-coeff>
+                <cross-section-sqft type="double"> 0.63 </cross-section-sqft>
+                <arming-time-sec type="double"> 3 </arming-time-sec>
+                <min-speed-for-guiding-mach type="double"> 0 </min-speed-for-guiding-mach>
+                <self-destruct-time-sec type="double"> 10000 </self-destruct-time-sec>
+                <all-aspect type="bool">true</all-aspect>
+                <lock-on-sun-deg type="double"> 0 </lock-on-sun-deg>
+                <seeker-angular-speed-dps type="double"> 0 </seeker-angular-speed-dps>
+                <rail type="bool">false</rail>
+                <max-report-distance type="double"> 275 </max-report-distance>
+                <vol-search type="double"> 0.075 </vol-search>
+                <vol-track type="double"> 0.25 </vol-track>
+                <vol-track-weak type="double"> 0.175 </vol-track-weak>
+                <drop-time type="double">0</drop-time>
+                <deploy-time type="double">0</deploy-time>
+                <lateral-dps type="double"> -10 </lateral-dps>
+                <max-pitch-deg type="double">-90</max-pitch-deg>
+                <hit-everything-nearby type="bool">true</hit-everything-nearby>
+            </mk-84>
+        </armament>
+    </payload>
+	
+	<rotors><!-- used for missiles over MP -->
+        <main>
+            <blade n="0">
+                <flap-deg type="double">0</flap-deg>
+            </blade>
+            <blade n="1">
+                <flap-deg type="double">0</flap-deg>
+            </blade>
+            <blade n="2">
+                <flap-deg type="double">0</flap-deg>
+            </blade>
+            <blade n="3">
+                <flap-deg type="double">0</flap-deg><!-- used for releasing flares -->
+                <position-deg type="double">0</position-deg><!-- used for releasing chaff -->
+            </blade>
+        </main>
+    </rotors>
+	
+	<systems>
+        <refuel>
+            <type>boom</type>
+            <serviceable type="bool">true</serviceable>
+            <max-fuel-transfer-lbs-min>3230</max-fuel-transfer-lbs-min>
+            <!-- 475 gallons/min @ 6.8 lbs/gallon AVCAT density -->
+            <!--<offset-x-m>-1.1485</offset-x-m>
+            <offset-y-m>-1.6881</offset-y-m>
+            <offset-z-m>0.8689</offset-z-m>-->
+            <offset-x-m>-7.2</offset-x-m>
+            <offset-y-m>1.05</offset-y-m>
+            <offset-z-m>0.04</offset-z-m>
+        </refuel>
+    </systems>
+	
+	 <nasal>
+        <aircraft>
+            <file>Aircraft/F-111C/Nasal/M_exec.nas</file>
+            <file>Aircraft/F-111C/Nasal/M_partition_processor.nas</file>
+            <file>Nasal/canvas/MFD_Generic.nas</file>
+            <file>Aircraft/Generic/an_spn_46.nas</file>
+            <file>Aircraft/Generic/an_spn_46.nas</file>
+            <file>Aircraft/F-111C/Nasal/liveries.nas</file>
+            <file>Aircraft/F-111C/Nasal/aircraft-main.nas</file>
+            <file>Aircraft/F-111C/Nasal/flaps_computer.nas</file>
+            <file>Aircraft/F-111C/Nasal/engines.nas</file>
+            <file>Aircraft/F-111C/Nasal/gear.nas</file>
+            <file>Aircraft/F-111C/Nasal/hud.nas</file>
+            <file>Aircraft/F-111C/Nasal/engines.nas</file>
+            <file>Aircraft/F-111C/Nasal/fuel-system.nas</file>
+            <file>Aircraft/F-111C/Nasal/electrics.nas</file>
+            <file>Aircraft/F-111C/Nasal/instruments.nas</file>
+            <file>Aircraft/F-111C/Nasal/afcs.nas</file>
+            <file>Aircraft/F-111C/Nasal/damage.nas</file>
+            <file>Nasal/HUD/HUD_main.nas</file>
+            <file>Nasal/VSD/VSD_main.nas</file>
+            <file>Nasal/TEWS/TEWS_main.nas</file>
+            <file>Nasal/MPCD/MPCD_main.nas</file>
+            <file>Aircraft/F-111C/Nasal/weapons.nas</file>
+            <file>Aircraft/F-111C/Nasal/ext_stores.nas</file>
+            <file>Aircraft/F-111C/Nasal/crash-and-stress.nas</file>
+        </aircraft>
+       
+        <environment>
+            <file>Nasal/environment.nas</file>
+        </environment>
+        <blackout>
+            <file>Aircraft/F-111C/Nasal/blackout.nas</file>
+        </blackout>
+        <armament>
+            <file>Aircraft/F-111C/Nasal/fox2.nas</file>
+        </armament>
+    </nasal>
+
+</PropertyList>

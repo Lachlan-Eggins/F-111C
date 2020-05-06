@@ -1,1 +1,1 @@
-aircraft.livery.init("Aircraft/General-Dynamics_F-111F/Models/Liveries");
+aircraft.livery.init("Aircraft/F-111C/Models/Liveries");
