@@ -1,7 +1,16 @@
 <?xml  version="1.0"?>
+
 <!-- F-111 C Variant
-   |  Lachlan Eggins: 2020-4-26
+   |  Lachlan Eggins: 4/26/2020
+   |  Josh Davidson (Octal450): 5/13/2020
 -->
+
 <PropertyList>
-  <path>ballon2.ac</path>
+	
+	<path>balloon2.ac</path> <!-- Its a balloon for now until 3D public -->
+	
+	<offsets>
+		<x-m>2.75148</x-m> <!-- Offset because the X is not centered in the 3D -->
+	</offsets>
+
 </PropertyList>

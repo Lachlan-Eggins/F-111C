@@ -2,11 +2,12 @@
 <!-- F-111C 
    | Authors:
    | Lachlan Eggins 3/5/2020
+   | Josh Davidson 5/12/2020
 
 -->
 <PropertyList include="Aircraft/Generic/Human/Include/walker-include.xml">
     <sim>
-        <author>Lachlan Eggins, Zac (3d), Jonathan Redpath, J Mav 16</author>
+        <author>Lachlan Eggins, Zac (3d), Josh Davidson/Octal450 (FDM) Jonathan Redpath, J Mav 16</author>
         <status>production</status>
 
         <tags>
@@ -101,9 +102,10 @@
 			</key>
         </help>
 		
-        <!--<hud>
-            <visibility n="1">false</visibility>
-        </hud> uncomment when aircraft flyable -->
+		<hud n="0">
+			<enable3d n="0">false</enable3d>
+			<enable3d n="1">false</enable3d>
+		</hud>
 		
 		<instrumentation>
             <path>Aircraft/F-111C/Systems/instrumentation.xml</path>
@@ -1012,43 +1014,8 @@
         </refuel>
     </systems>
 	
-	 <nasal>
-        <aircraft>
-            <file>Aircraft/F-111C/Nasal/M_exec.nas</file>
-            <file>Aircraft/F-111C/Nasal/M_partition_processor.nas</file>
-            <file>Nasal/canvas/MFD_Generic.nas</file>
-            <file>Aircraft/Generic/an_spn_46.nas</file>
-            <file>Aircraft/Generic/an_spn_46.nas</file>
-            <file>Aircraft/F-111C/Nasal/liveries.nas</file>
-            <file>Aircraft/F-111C/Nasal/aircraft-main.nas</file>
-            <file>Aircraft/F-111C/Nasal/flaps_computer.nas</file>
-            <file>Aircraft/F-111C/Nasal/engines.nas</file>
-            <file>Aircraft/F-111C/Nasal/gear.nas</file>
-            <file>Aircraft/F-111C/Nasal/hud.nas</file>
-            <file>Aircraft/F-111C/Nasal/engines.nas</file>
-            <file>Aircraft/F-111C/Nasal/fuel-system.nas</file>
-            <file>Aircraft/F-111C/Nasal/electrics.nas</file>
-            <file>Aircraft/F-111C/Nasal/instruments.nas</file>
-            <file>Aircraft/F-111C/Nasal/afcs.nas</file>
-            <file>Aircraft/F-111C/Nasal/damage.nas</file>
-            <file>Nasal/HUD/HUD_main.nas</file>
-            <file>Nasal/VSD/VSD_main.nas</file>
-            <file>Nasal/TEWS/TEWS_main.nas</file>
-            <file>Nasal/MPCD/MPCD_main.nas</file>
-            <file>Aircraft/F-111C/Nasal/weapons.nas</file>
-            <file>Aircraft/F-111C/Nasal/ext_stores.nas</file>
-            <file>Aircraft/F-111C/Nasal/crash-and-stress.nas</file>
-        </aircraft>
-       
-        <environment>
-            <file>Nasal/environment.nas</file>
-        </environment>
-        <blackout>
-            <file>Aircraft/F-111C/Nasal/blackout.nas</file>
-        </blackout>
-        <armament>
-            <file>Aircraft/F-111C/Nasal/fox2.nas</file>
-        </armament>
+	<nasal>
+		
     </nasal>
 
 </PropertyList>

@@ -1,7 +1,9 @@
 <?xml  version="1.0"?>
-<!-- F-111 C Variant
-   |  Lachlan Eggins: 2020-4-26
+
+<!-- F-111 F Variant
+   |  Lachlan Eggins: 4/26/2020
+   |  Josh Davidson (Octal450): 5/13/2020
 -->
-<PropertyList>
-  <path>generic-trailer-GPU.ac</path>
+
+<PropertyList include="F-111C.xml"> <!-- Just use the C for now -->
 </PropertyList>

@@ -19,7 +19,7 @@
         </previews>
 		
         <flight-model>jsb</flight-model>
-        <aero>F-111F</aero>
+        <aero>F-111C</aero>
 		
         <model>
             <path>Aircraft/F-111C/Models/F-111F.xml</path>
