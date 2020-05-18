@@ -184,9 +184,9 @@
 		</tank>
 	</propulsion>
 	
+	<system file="hydraulics"/>
 	<!--system file="f-111c-fcs"/-->
 	
-    <system file="hydraulics"/>
 	<flight_control name="none"/>
 	<aerodynamics file="Systems/f-111c-aerodynamics.xml"/>
 	<!--external_reactions file="Systems/f-111c-external-reactions"/-->
