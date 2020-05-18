@@ -1,0 +1,226 @@
+<?xml version="1.0"?>
+<!--
+        Description: F-111C hydraulics system
+		Author: Jonathan Redpath (legoboyvdlpATgmailDOTcom)
+    -->
+
+<system name="hydraulic">
+
+    <channel name="Hydraulic System" execrate="30">
+		<switch name="systems/hydraulics/primary-system-pump-eng-1-failed">
+			<default value="0"/>
+			<test logic="OR" value="1">
+				/controls/engines/engine[0]/fire-btn eq 1
+				/systems/failures/hyd-eng-1-primary-pump-failed eq 1
+			</test>
+		</switch>
+		
+		<switch name="systems/hydraulics/primary-system-pump-eng-2-failed">
+			<default value="0"/>
+			<test logic="OR" value="1">
+				/controls/engines/engine[1]/fire-btn eq 1
+				/systems/failures/hyd-eng-2-primary-pump-failed eq 1
+			</test>
+		</switch>
+		
+		<switch name="systems/hydraulics/utility-system-pump-eng-1-failed">
+			<default value="0"/>
+			<test logic="OR" value="1">
+				/controls/engines/engine[0]/fire-btn eq 1
+				/systems/failures/hyd-eng-1-utility-pump-failed eq 1
+			</test>
+		</switch>
+		
+		<switch name="systems/hydraulics/utility-system-pump-eng-2-failed">
+			<default value="0"/>
+			<test logic="OR" value="1">
+				/controls/engines/engine[1]/fire-btn eq 1
+				/systems/failures/hyd-eng-2-utility-pump-failed eq 1
+			</test>
+		</switch>
+		
+		<scheduled_gain name="systems/hydraulics/primary-system-pump-eng-1">
+            <input>propulsion/engine[0]/n2</input>
+            <table>
+                <independentVar lookup="row">propulsion/engine[0]/n2</independentVar>
+                <independentVar lookup="column">systems/hydraulics/primary-system-pump-eng-1-failed</independentVar>
+                <tableData>
+                            0       1
+                    0       0       0
+					12      0       0
+					35      100     0
+                    40   	3100    0
+                </tableData>
+            </table>
+            <clipto>
+                <min> 0 </min>
+                <max> 3100 </max>
+            </clipto>
+        </scheduled_gain>
+		
+		<scheduled_gain name="systems/hydraulics/primary-system-pump-eng-2">
+            <input>propulsion/engine[1]/n2</input>
+            <table>
+                <independentVar lookup="row">propulsion/engine[1]/n2</independentVar>
+                <independentVar lookup="column">systems/hydraulics/primary-system-pump-eng-2-failed</independentVar>
+                <tableData>
+                            0       1
+                    0       0       0
+					12      0       0
+					35      100     0
+                    40   	3100    0
+                </tableData>
+            </table>
+            <clipto>
+                <min> 0 </min>
+                <max> 3100 </max>
+            </clipto>
+        </scheduled_gain>
+		
+		<scheduled_gain name="systems/hydraulics/utility-system-pump-eng-1">
+            <input>propulsion/engine[0]/n2</input>
+            <table>
+                <independentVar lookup="row">propulsion/engine[0]/n2</independentVar>
+                <independentVar lookup="column">systems/hydraulics/utility-system-pump-eng-1-failed</independentVar>
+                <tableData>
+                            0       1
+                    0       0       0
+					12      0       0
+					35      100     0
+                    40   	3100    0
+                </tableData>
+            </table>
+            <clipto>
+                <min> 0 </min>
+                <max> 3100 </max>
+            </clipto>
+        </scheduled_gain>
+		
+		<scheduled_gain name="systems/hydraulics/utility-system-pump-eng-2">
+            <input>propulsion/engine[1]/n2</input>
+            <table>
+                <independentVar lookup="row">propulsion/engine[1]/n2</independentVar>
+                <independentVar lookup="column">systems/hydraulics/utility-system-pump-eng-2-failed</independentVar>
+                <tableData>
+                            0       1
+                    0       0       0
+					12      0       0
+					35      100     0
+                    40   	3100    0
+                </tableData>
+            </table>
+            <clipto>
+                <min> 0 </min>
+                <max> 3100 </max>
+            </clipto>
+        </scheduled_gain>
+		
+		<switch name="systems/hydraulics/utility-hyd-manual-isolation">
+			<default value="/controls/hydraulics/utility-hyd-isolation"/> <!-- todo electrical supply of automatic function -->
+			<test value="1">
+				/controls/hydraulics/utility-hyd-isolation eq 0
+				/controls/gear/gear-down eq 1
+			</test>
+		</switch>
+		
+		<!-- flight controls and wing sweep -->
+		<fcs_function name="systems/hydraulics/primary-system-pressure-cmd">
+			<function>
+				<max>
+					<property>systems/hydraulics/primary-system-pump-eng-1</property>
+					<property>systems/hydraulics/primary-system-pump-eng-2</property>
+				</max>
+			</function>
+		</fcs_function>
+		
+		<lag_filter name="systems/hydraulics/primary-system-pressure">
+			<input>systems/hydraulics/primary-system-pressure-cmd</input>
+			<c1>0.95</c1>
+		</lag_filter>
+		
+		<!-- flight controls and wing sweep -->
+		<fcs_function name="systems/hydraulics/utility-system-pressure-cmd">
+			<function>
+				<max>
+					<property>systems/hydraulics/utility-system-pump-eng-1</property>
+					<property>systems/hydraulics/utility-system-pump-eng-2</property>
+				</max>
+			</function>
+		</fcs_function>
+		
+		<lag_filter name="systems/hydraulics/utility-system-pressure">
+			<input>systems/hydraulics/utility-system-pressure-cmd</input>
+			<c1>0.95</c1>
+		</lag_filter>
+		
+		<switch name="systems/hydraulics/utility-automatic-isolation">
+			<default value="1"/>
+			<test logic="AND" value="0"> <!-- closed -->
+				systems/hydraulics/utility-automatic-isolation eq 0
+				systems/hydraulics/primary-system-pressure lt 1200
+			</test>
+			<test value="0"> <!-- closed -->
+				systems/hydraulics/primary-system-pressure lt 400
+			</test>
+		</switch>
+		
+		<!-- speed brakes, flaps, emergency generator, air inlet control, bomb bay doors, trapeze controlled by this -->
+		<fcs_function name="systems/hydraulics/utility-system-services-pressure">
+			<function>
+				<product>
+					<property>systems/hydraulics/utility-automatic-isolation</property>
+					<property>systems/hydraulics/utility-system-pressure</property>
+				</product>
+			</function>
+		</fcs_function>
+		
+		<!-- landing gear, tail bumper, wheel brakes, nose wheel steering controlled by this -->
+		<fcs_function name="systems/hydraulics/utility-system-optional-services-pressure">
+			<function>
+				<product>
+					<property>systems/hydraulics/utility-automatic-isolation</property>
+					<property>systems/hydraulics/utility-hyd-manual-isolation</property>
+					<property>systems/hydraulics/utility-system-pressure</property>
+				</product>
+			</function>
+		</fcs_function>
+		
+		<!-- flight controls and wing sweep controlled by this -->
+		<fcs_function name="systems/hydraulics/flight-controls-pressure">
+			<function>
+				<max>
+					<property>systems/hydraulics/primary-system-pressure</property>
+					<property>systems/hydraulics/utility-system-pressure</property>
+				</max>
+			</function>
+		</fcs_function>
+		
+		<switch name="/controls/hydraulics/warnings/primary-system-pump-eng-1-lo-pr">
+			<default value="0"/>
+			<test value="1">
+				systems/hydraulics/primary-system-pump-eng-1 lt 500
+			</test>
+		</switch>
+		
+		<switch name="/controls/hydraulics/warnings/primary-system-pump-eng-2-lo-pr">
+			<default value="0"/>
+			<test value="1">
+				systems/hydraulics/primary-system-pump-eng-2 lt 500
+			</test>
+		</switch>
+		
+		<switch name="/controls/hydraulics/warnings/utility-system-pump-eng-1-lo-pr">
+			<default value="0"/>
+			<test value="1">
+				systems/hydraulics/utility-system-pump-eng-1 lt 500
+			</test>
+		</switch>
+		
+		<switch name="/controls/hydraulics/warnings/utility-system-pump-eng-2-lo-pr">
+			<default value="0"/>
+			<test value="1">
+				systems/hydraulics/utility-system-pump-eng-2 lt 500
+			</test>
+		</switch>
+    </channel>
+</system>
