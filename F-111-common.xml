@@ -88,10 +88,6 @@
                 <desc>Fire guns / missiles</desc>
             </key>
             <key>
-                <name>Ctrl-v</name>
-                <desc>Back to Pilot's View or toggle Pilot's and Backseat View.</desc>
-            </key>
-            <key>
                 <name>y/Y</name>
                 <desc>Select next/prev target (by distance).</desc>
             </key>
@@ -329,6 +325,23 @@
             <master-arm type="bool">false</master-arm>
             <selected-armament type="string"/>
         </armament>
+		<engines>
+			<engine n="0">
+				<fire-btn type="bool">0</fire-btn>
+			</engine>
+			<engine n="1">
+				<fire-btn type="bool">0</fire-btn>
+			</engine>
+		</engines>
+		<hydraulics>
+			<utility-hyd-isolation type="bool">0</utility-hyd-isolation>
+			<warnings>
+				<primary-system-pump-eng-1-lo-pr type="bool">0</primary-system-pump-eng-1-lo-pr>
+				<primary-system-pump-eng-2-lo-pr type="bool">0</primary-system-pump-eng-2-lo-pr>
+				<utility-system-pump-eng-1-lo-pr type="bool">0</utility-system-pump-eng-1-lo-pr>
+				<utility-system-pump-eng-2-lo-pr type="bool">0</utility-system-pump-eng-2-lo-pr>
+			</warnings>
+		</hydraulics>
     </controls>
 	
 	<consumables>
@@ -473,15 +486,6 @@
                 <binding>
                     <command>property-toggle</command>
                     <property>sim/model/f15/controls/AFCS/att-hold</property>
-                </binding>
-            </key>
-
-            <key n="22">
-                <name>Ctrl-v</name>
-                <desc>Select pilot's view (view 0) or toggle between pilot's and RIO's view</desc>
-                <binding>
-                    <command>nasal</command>
-                    <script>aircraft.toggle_cockpit_views();</script>
                 </binding>
             </key>
 
@@ -1000,6 +1004,12 @@
     </rotors>
 	
 	<systems>
+		<failures>
+			<hyd-eng-1-primary-pump-failed type="bool">0</hyd-eng-1-primary-pump-failed>
+			<hyd-eng-2-primary-pump-failed type="bool">0</hyd-eng-2-primary-pump-failed>
+			<hyd-eng-1-utility-pump-failed type="bool">0</hyd-eng-1-utility-pump-failed>
+			<hyd-eng-2-utility-pump-failed type="bool">0</hyd-eng-2-utility-pump-failed>
+		</failures>
         <refuel>
             <type>boom</type>
             <serviceable type="bool">true</serviceable>
