@@ -1,7 +1,31 @@
 <?xml  version="1.0"?>
 <!-- F-111 C Variant
-   |  Lachlan Eggins: 2020-4-26
+Lachlan Eggins
+Isaac Gibbs
 -->
 <PropertyList>
-  <path>ballon2.ac</path>
+
+  <path>f111-c.ac</path>
+
+<!-- Why is the effect not applying? -->
+
+  <effect>
+    <inherits-from>Aircraft/F-111C/Models/Effects/fuselage-shader</inherits-from>
+    <object-name>fb111.002</object-name>
+    <object-name>fb111.003</object-name>
+    <object-name>fb111.004</object-name>
+    <object-name>fb111.005</object-name>
+    <object-name>fb111.006</object-name>
+    <object-name>fb111.008</object-name>
+    <object-name>fb111.009</object-name>
+    <object-name>fb111.010</object-name>
+    <object-name>fb111.011</object-name>
+    <object-name>fb111.013</object-name>
+  </effect>
+
+  <effect>
+    <inherits-from>Aircraft/F-111C/Models/Effects/glass</inherits-from>
+    <object-name>fb111.007</object-name>
+  </effect>
+
 </PropertyList>
