@@ -4,6 +4,7 @@ please see Docs/README.model-combined.eff for documentation
 -->
 <PropertyList>
 	<name>Aircraft/F-111C/Models/Shaders/fuselage</name>
+	<inherits-from>Effects/model-default</inherits-from>
 	<parameters>
 		<!-- 		Diffuse Texture -->
 <!--		<texture n ="0">
