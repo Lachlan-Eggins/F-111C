@@ -7,7 +7,7 @@
 <!-- Why is the effect not applying? -->
 
   <effect>
-    <inherits-from>Aircraft/F-111C/Models/Effects/fuselage-shader.eff</inherits-from>
+    <inherits-from>Aircraft/F-111C/Models/Effects/fuselage-shader</inherits-from>
     <object-name>fb111.002</object-name>
     <object-name>fb111.003</object-name>
     <object-name>fb111.004</object-name>
@@ -21,7 +21,7 @@
   </effect>
 
   <effect>
-    <inherits-from>Aircraft/F-111C/Models/Effects/glass.eff</inherits-from>
+    <inherits-from>Aircraft/F-111C/Models/Effects/glass</inherits-from>
     <object-name>fb111.007</object-name>
   </effect>
 
